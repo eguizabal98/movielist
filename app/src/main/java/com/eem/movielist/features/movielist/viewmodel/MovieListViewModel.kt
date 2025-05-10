@@ -16,14 +16,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieListViewModel
-@Inject
-constructor(
+class MovieListViewModel @Inject constructor(
     private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
     private val getFavoriteMovieUseCase: GetFavoriteMovieUseCase,
     private val addFavoriteMovieUseCase: AddFavoriteMovieUseCase,
-    private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
+    private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase
 ) : ViewModel() {
+
     private val internalState = MutableStateFlow(MovieListState())
     val state: StateFlow<MovieListState> = internalState.asStateFlow()
 
@@ -44,18 +43,16 @@ constructor(
     }
 
     fun updateSearchQuery(query: String) {
-        internalState.value =
-            internalState.value.copy(
-                searchQuery = query,
-                filterMovies =
-                    if (query.isEmpty()) {
-                        internalState.value.nowPlayingMovies
-                    } else {
-                        internalState.value.nowPlayingMovies.filter {
-                            it.title?.contains(query, ignoreCase = true) == true
-                        }
-                    },
-            )
+        internalState.value = internalState.value.copy(
+            searchQuery = query,
+            filterMovies = if (query.isEmpty()) {
+                internalState.value.nowPlayingMovies
+            } else {
+                internalState.value.nowPlayingMovies.filter {
+                    it.title?.contains(query, ignoreCase = true) == true
+                }
+            }
+        )
     }
 
     fun deleteFavoriteMovie(movieId: Long) {
@@ -64,10 +61,7 @@ constructor(
         }
     }
 
-    fun addFavoriteMovie(
-        movieId: Long,
-        title: String,
-    ) {
+    fun addFavoriteMovie(movieId: Long, title: String) {
         viewModelScope.launch {
             addFavoriteMovieUseCase.addFavoriteMovies(FavoriteMovie(movieId, title))
         }

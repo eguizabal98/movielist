@@ -40,8 +40,9 @@ dependencies {
     implementation(libs.material)
 
     // Hilt
-    implementation(libs.hilt.core)
+    implementation(libs.bundles.hilt.android)
     ksp(libs.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     // OkHttp
     implementation(platform(libs.okhttp.bom))
@@ -55,7 +56,16 @@ dependencies {
     // Gson
     implementation(libs.gson)
 
+    // Room
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Modules
+    implementation(project(":domain"))
 }

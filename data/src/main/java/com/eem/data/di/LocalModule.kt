@@ -14,17 +14,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalModule {
+
     @Singleton
     @Provides
-    fun provideLocalDataBase(
-        @ApplicationContext appContext: Context,
-    ): MovieDataBase {
-        val roomInstance =
-            Room.databaseBuilder(
-                appContext,
-                MovieDataBase::class.java,
-                MovieDataBase.DATABASE_NAME,
-            )
+    fun provideLocalDataBase(@ApplicationContext appContext: Context): MovieDataBase {
+        val roomInstance = Room.databaseBuilder(
+            appContext,
+            MovieDataBase::class.java,
+            MovieDataBase.DATABASE_NAME
+        )
         return roomInstance
             .fallbackToDestructiveMigration(true)
             .build()

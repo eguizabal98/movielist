@@ -11,7 +11,7 @@ data class MoviePageDataDto(
     @SerializedName("total_pages")
     var totalPages: Int? = null,
     @SerializedName("total_results")
-    var totalResults: Int? = null,
+    var totalResults: Int? = null
 )
 
 fun MoviePageDataDto.toDomain(): MoviePageData {
@@ -19,6 +19,6 @@ fun MoviePageDataDto.toDomain(): MoviePageData {
         page = page ?: 0,
         results = results.map { it.toDomain() },
         totalPages = totalPages ?: 0,
-        totalResults = totalResults ?: 0,
+        totalResults = totalResults ?: 0
     )
 }

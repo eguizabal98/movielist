@@ -13,10 +13,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
+
     @Provides
     @Singleton
-    fun providesMovieRepository(
-        moviesApi: MoviesApi,
-        favoriteDao: FavoriteDao,
-    ): MovieRepository = MovieRepositoryImpl(moviesApi, favoriteDao)
+    fun providesMovieRepository(moviesApi: MoviesApi, favoriteDao: FavoriteDao): MovieRepository =
+        MovieRepositoryImpl(moviesApi, favoriteDao)
 }
