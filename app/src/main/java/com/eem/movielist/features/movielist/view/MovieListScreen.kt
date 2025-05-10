@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,8 +28,9 @@ fun MovieListContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(16.dp)
+            .verticalScroll(state = rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         MovieListTopBar(modifier = Modifier.fillMaxWidth())
         MovieListSearchBar(
@@ -36,12 +39,14 @@ fun MovieListContent() {
             modifier = Modifier.fillMaxWidth(),
             placeholder = stringResource(R.string.search_movie),
         )
-        repeat(10) { repetition ->
-            MovieCardInfo(
-                title = "Movie Title $repetition",
-                overview = "Movie Description $repetition",
-                modifier = Modifier.fillMaxWidth()
-            )
+        Column {
+            repeat(10) { repetition ->
+                MovieCardInfo(
+                    title = "Movie Title $repetition",
+                    overview = "Movie Description $repetition",
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }
