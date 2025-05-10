@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">movielist</string>
+    <string name="now_playing_movies">Now Playing Movies</string>
+    <string name="search_movie">Search Movie</string>
 </resources>
