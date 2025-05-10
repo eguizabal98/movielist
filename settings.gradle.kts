@@ -23,4 +23,3 @@ rootProject.name = "movielist"
 include(":app")
 include(":domain")
 include(":data")
-include(":navigation")
