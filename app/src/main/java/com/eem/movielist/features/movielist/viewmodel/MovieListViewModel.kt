@@ -33,7 +33,7 @@ class MovieListViewModel @Inject constructor(
                 internalState.value.nowPlayingMovies
             } else {
                 internalState.value.nowPlayingMovies.filter {
-                    it.title?.contains(query) == true
+                    it.title?.contains(query, ignoreCase = true) == true
                 }
             }
         )

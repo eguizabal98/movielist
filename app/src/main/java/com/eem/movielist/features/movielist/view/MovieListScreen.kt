@@ -33,12 +33,14 @@ fun MovieListScreen(
         viewModel.getNowPlayingMovies()
     }
 
-    MovieListContent(state.filterMovies)
+    MovieListContent(state.filterMovies, state.searchQuery, viewModel::updateSearchQuery)
 }
 
 @Composable
 fun MovieListContent(
-    movies: List<MovieItem>
+    movies: List<MovieItem>,
+    query: String? = "",
+    onFilterChange: (String) -> Unit = {},
 ) {
     LazyColumn(
         modifier = Modifier
@@ -51,8 +53,10 @@ fun MovieListContent(
         }
         item {
             MovieListSearchBar(
-                query = "",
-                onQueryChange = {},
+                query = query.orEmpty(),
+                onQueryChange = {
+                    onFilterChange(it)
+                },
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = stringResource(R.string.search_movie),
             )
