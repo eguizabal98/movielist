@@ -20,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -40,32 +40,10 @@ dependencies {
     implementation(libs.material)
 
     // Hilt
-    implementation(libs.bundles.hilt.android)
+    implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-    ksp(libs.androidx.hilt.compiler)
-
-    // OkHttp
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.logging.interceptor)
-    implementation(libs.okhttp)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
-
-    // Gson
-    implementation(libs.gson)
-
-    // Room
-    implementation(libs.androidx.room)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    testImplementation(libs.androidx.room.testing)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // Modules
-    implementation(project(":domain"))
 }
