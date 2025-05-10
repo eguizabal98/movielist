@@ -7,10 +7,10 @@ import com.eem.data.database.entity.FavoriteEntity
 
 @Database(
     entities = [
-        FavoriteEntity::class
+        FavoriteEntity::class,
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class MovieDataBase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao

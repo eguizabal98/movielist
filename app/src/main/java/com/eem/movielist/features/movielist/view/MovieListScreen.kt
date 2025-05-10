@@ -25,9 +25,7 @@ import com.eem.movielist.features.movielist.viewmodel.MovieListViewModel
 import com.eem.movielist.ui.theme.MovieListTheme
 
 @Composable
-fun MovieListScreen(
-    viewModel: MovieListViewModel = hiltViewModel()
-) {
+fun MovieListScreen(viewModel: MovieListViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
@@ -40,7 +38,7 @@ fun MovieListScreen(
         query = state.searchQuery,
         onFilterChange = viewModel::updateSearchQuery,
         addFavorite = viewModel::addFavoriteMovie,
-        removeFavorite = viewModel::deleteFavoriteMovie
+        removeFavorite = viewModel::deleteFavoriteMovie,
     )
 }
 
@@ -51,12 +49,13 @@ fun MovieListContent(
     query: String? = "",
     onFilterChange: (String) -> Unit = {},
     addFavorite: (Long, String) -> Unit = { _, _ -> },
-    removeFavorite: (Long) -> Unit = {}
+    removeFavorite: (Long) -> Unit = {},
 ) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item {
@@ -83,7 +82,7 @@ fun MovieListContent(
                     } else {
                         removeFavorite(movie.id)
                     }
-                }
+                },
             )
         }
     }
@@ -94,18 +93,19 @@ fun MovieListContent(
 fun MovieListScreenPreview() {
     MovieListTheme {
         MovieListContent(
-            movies = listOf(
-                MovieItem(
-                    id = 1,
-                    title = "Movie 1",
-                    overview = "Overview 1",
+            movies =
+                listOf(
+                    MovieItem(
+                        id = 1,
+                        title = "Movie 1",
+                        overview = "Overview 1",
+                    ),
+                    MovieItem(
+                        id = 2,
+                        title = "Movie 2",
+                        overview = "Overview 2",
+                    ),
                 ),
-                MovieItem(
-                    id = 2,
-                    title = "Movie 2",
-                    overview = "Overview 2",
-                )
-            )
         )
     }
 }
