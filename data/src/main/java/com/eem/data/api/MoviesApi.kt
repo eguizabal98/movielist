@@ -9,6 +9,6 @@ interface MoviesApi {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(
         @Query("language") language: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
     ): Response<MoviePageDataDto>
 }
