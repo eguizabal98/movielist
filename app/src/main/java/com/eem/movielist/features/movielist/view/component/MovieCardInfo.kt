@@ -43,16 +43,18 @@ fun MovieCardInfo(
         Column(
             modifier = Modifier.weight(3f)
         ) {
-
+            movieItem?.posterUrl?.let { MoviePoster(it) }
         }
         Column(
-            modifier = Modifier.weight(6f),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier
+                .weight(6f)
+                .padding(start = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(text = movieItem?.title.orEmpty(), style = MaterialTheme.typography.titleMedium)
             Text(
                 text = movieItem?.overview.orEmpty(),
-                maxLines = 3,
+                maxLines = 7,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.bodyMedium
             )
