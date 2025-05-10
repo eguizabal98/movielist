@@ -1,7 +1,7 @@
 package com.eem.domain.model
 
 data class MovieItem(
-    var id: Int,
+    var id: Long,
     var originalTitle: String? = null,
     var title: String? = null,
     var backdropUrl: String? = null,

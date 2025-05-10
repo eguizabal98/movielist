@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.eem.domain.model.FavoriteMovie
 import com.eem.domain.model.MovieItem
 import com.eem.movielist.R
 import com.eem.movielist.features.movielist.view.component.MovieCardInfo
@@ -33,14 +34,24 @@ fun MovieListScreen(
         viewModel.getNowPlayingMovies()
     }
 
-    MovieListContent(state.filterMovies, state.searchQuery, viewModel::updateSearchQuery)
+    MovieListContent(
+        movies = state.filterMovies,
+        favoriteMovies = state.favoriteMovies,
+        query = state.searchQuery,
+        onFilterChange = viewModel::updateSearchQuery,
+        addFavorite = viewModel::addFavoriteMovie,
+        removeFavorite = viewModel::deleteFavoriteMovie
+    )
 }
 
 @Composable
 fun MovieListContent(
     movies: List<MovieItem>,
+    favoriteMovies: List<FavoriteMovie> = emptyList(),
     query: String? = "",
     onFilterChange: (String) -> Unit = {},
+    addFavorite: (Long, String) -> Unit = { _, _ -> },
+    removeFavorite: (Long) -> Unit = {}
 ) {
     LazyColumn(
         modifier = Modifier
@@ -63,9 +74,16 @@ fun MovieListContent(
         }
         items(movies) { item ->
             MovieCardInfo(
-                title = item.title.orEmpty(),
-                overview = item.overview.orEmpty(),
-                modifier = Modifier.fillMaxWidth()
+                movieItem = item,
+                modifier = Modifier.fillMaxWidth(),
+                isFavorite = favoriteMovies.any { it.id == item.id },
+                onFavoriteClick = { state, movie ->
+                    if (state) {
+                        addFavorite(movie.id, item.title.orEmpty())
+                    } else {
+                        removeFavorite(movie.id)
+                    }
+                }
             )
         }
     }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,15 +21,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.eem.domain.model.MovieItem
 import com.eem.movielist.ui.theme.MovieListTheme
 
 @Composable
 fun MovieCardInfo(
     modifier: Modifier = Modifier,
-    imageUrl: String? = null,
-    title: String = "",
-    overview: String = "",
-    rate: Int = 0
+    movieItem: MovieItem? = null,
+    isFavorite: Boolean = false,
+    onFavoriteClick: (Boolean, MovieItem) -> Unit = { _, _ -> }
 ) {
     Row(
         modifier = modifier
@@ -48,9 +49,9 @@ fun MovieCardInfo(
             modifier = Modifier.weight(6f),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(text = title, style = MaterialTheme.typography.titleMedium)
+            Text(text = movieItem?.title.orEmpty(), style = MaterialTheme.typography.titleMedium)
             Text(
-                text = overview,
+                text = movieItem?.overview.orEmpty(),
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.bodyMedium
@@ -59,11 +60,22 @@ fun MovieCardInfo(
         Column(
             modifier = Modifier.weight(1f)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    Icons.Rounded.FavoriteBorder,
-                    contentDescription = null
-                )
+            IconButton(onClick = {
+                movieItem?.let {
+                    onFavoriteClick(!isFavorite, it)
+                }
+            }) {
+                if (isFavorite) {
+                    Icon(
+                        Icons.Rounded.Favorite,
+                        contentDescription = null
+                    )
+                } else {
+                    Icon(
+                        Icons.Rounded.FavoriteBorder,
+                        contentDescription = null
+                    )
+                }
             }
         }
     }
@@ -75,10 +87,11 @@ fun MovieCardInfoPreview() {
     MovieListTheme {
         MovieCardInfo(
             modifier = Modifier.fillMaxWidth(),
-            imageUrl = null,
-            title = "Title",
-            overview = "Overview",
-            rate = 5
+            movieItem = MovieItem(
+                id = 1,
+                title = "Movie Title",
+                overview = "Movie Overview",
+            )
         )
     }
 }

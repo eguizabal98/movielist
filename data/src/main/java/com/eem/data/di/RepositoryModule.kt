@@ -1,6 +1,7 @@
 package com.eem.data.di
 
 import com.eem.data.api.MoviesApi
+import com.eem.data.database.dao.FavoriteDao
 import com.eem.data.repository.MovieRepositoryImpl
 import com.eem.domain.repository.MovieRepository
 import dagger.Module
@@ -15,6 +16,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesMovieRepository(moviesApi: MoviesApi): MovieRepository =
-        MovieRepositoryImpl(moviesApi)
+    fun providesMovieRepository(moviesApi: MoviesApi, favoriteDao: FavoriteDao): MovieRepository =
+        MovieRepositoryImpl(moviesApi, favoriteDao)
 }

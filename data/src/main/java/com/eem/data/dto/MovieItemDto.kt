@@ -5,14 +5,14 @@ import com.eem.domain.model.MovieItem
 import com.google.gson.annotations.SerializedName
 
 data class MovieItemDto(
+    @SerializedName("id")
+    var id: Long? = null,
     @SerializedName("adult")
     var adult: Boolean? = null,
     @SerializedName("backdrop_path")
     var backdropPath: String? = null,
     @SerializedName("genre_ids")
     var genreIds: List<Int> = listOf(),
-    @SerializedName("id")
-    var id: Int? = null,
     @SerializedName("original_language")
     var originalLanguage: String? = null,
     @SerializedName("original_title")
