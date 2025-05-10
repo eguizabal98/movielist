@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.eem.movielist.ui.theme.MovielistTheme
+import com.eem.movielist.ui.theme.MovieListTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MovielistTheme {
+            MovieListTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                 }
