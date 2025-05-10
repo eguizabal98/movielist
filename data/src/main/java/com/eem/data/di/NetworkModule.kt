@@ -20,16 +20,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
     @Singleton
     @Named(BASIC_AUTH_INTERCEPTOR)
     fun providesHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
-            val newRequest =
-                request.newBuilder()
-                    .addHeader("Authorization", "Bearer ${ApiConfig.API_READ_TOKEN}")
-                    .build()
+            val newRequest = request.newBuilder()
+                .addHeader("Authorization", "Bearer ${ApiConfig.API_READ_TOKEN}")
+                .build()
             chain.proceed(newRequest)
         }
     }
@@ -53,24 +53,20 @@ object NetworkModule {
         @Named(LOGGER_INTERCEPTOR)
         loggingInterceptor: Interceptor,
         @Named(BASIC_AUTH_INTERCEPTOR)
-        basicAuthInterceptor: Interceptor,
-    ): OkHttpClient =
-        OkHttpClient
-            .Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(basicAuthInterceptor)
-            .followRedirects(false)
-            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .build()
+        basicAuthInterceptor: Interceptor
+    ): OkHttpClient = OkHttpClient
+        .Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(basicAuthInterceptor)
+        .followRedirects(false)
+        .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .build()
 
     @Provides
     @Singleton
-    fun providesRetrofitClient(
-        client: OkHttpClient,
-        gsonBuilder: GsonBuilder,
-    ): Retrofit {
+    fun providesRetrofitClient(client: OkHttpClient, gsonBuilder: GsonBuilder): Retrofit {
         val gson = gsonBuilder.setStrictness(Strictness.LENIENT).create()
 
         return Retrofit

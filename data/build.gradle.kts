@@ -43,6 +43,18 @@ dependencies {
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
 
+    // OkHttp
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.logging.interceptor)
+    implementation(libs.okhttp)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
+    // Gson
+    implementation(libs.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
