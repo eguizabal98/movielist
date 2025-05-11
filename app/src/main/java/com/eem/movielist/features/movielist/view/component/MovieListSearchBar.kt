@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.eem.movielist.ui.theme.MovieListTheme
@@ -21,19 +22,21 @@ fun MovieListSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String
+    placeholder: String,
 ) {
     val focusManager = LocalFocusManager.current
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .testTag("search_bar"),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search icon"
+                contentDescription = "Search icon",
             )
         },
         placeholder = {
@@ -41,10 +44,9 @@ fun MovieListSearchBar(
         },
         singleLine = true,
         shape = RoundedCornerShape(12.dp),
-        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
+        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
     )
 }
-
 
 @Composable
 @Preview
@@ -53,7 +55,7 @@ fun MovieListSearchBarPreview() {
         MovieListSearchBar(
             query = "",
             onQueryChange = {},
-            placeholder = "Search movies"
+            placeholder = "Search movies",
         )
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -62,11 +63,14 @@ fun MovieCardInfo(
         Column(
             modifier = Modifier.weight(1f)
         ) {
-            IconButton(onClick = {
-                movieItem?.let {
-                    onFavoriteClick(!isFavorite, it)
-                }
-            }) {
+            IconButton(
+                onClick = {
+                    movieItem?.let {
+                        onFavoriteClick(!isFavorite, it)
+                    }
+                },
+                modifier = Modifier.testTag("favorite_button"),
+            ) {
                 if (isFavorite) {
                     Icon(
                         Icons.Rounded.Favorite,
