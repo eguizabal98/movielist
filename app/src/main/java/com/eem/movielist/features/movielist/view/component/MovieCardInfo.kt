@@ -30,26 +30,28 @@ fun MovieCardInfo(
     modifier: Modifier = Modifier,
     movieItem: MovieItem? = null,
     isFavorite: Boolean = false,
-    onFavoriteClick: (Boolean, MovieItem) -> Unit = { _, _ -> }
+    onFavoriteClick: (Boolean, MovieItem) -> Unit = { _, _ -> },
 ) {
     Row(
-        modifier = modifier
-            .clip(ShapeDefaults.Small)
-            .border(
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-                shape = ShapeDefaults.Small
-            )
-            .padding(16.dp)
+        modifier =
+            modifier
+                .clip(ShapeDefaults.Small)
+                .border(
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                    shape = ShapeDefaults.Small,
+                )
+                .padding(16.dp),
     ) {
         Column(
-            modifier = Modifier.weight(3f)
+            modifier = Modifier.weight(3f),
         ) {
             movieItem?.posterUrl?.let { MoviePoster(it) }
         }
         Column(
-            modifier = Modifier
-                .weight(6f)
-                .padding(start = 16.dp),
+            modifier =
+                Modifier
+                    .weight(6f)
+                    .padding(start = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(text = movieItem?.title.orEmpty(), style = MaterialTheme.typography.titleMedium)
@@ -57,11 +59,11 @@ fun MovieCardInfo(
                 text = movieItem?.overview.orEmpty(),
                 maxLines = 7,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
             IconButton(
                 onClick = {
@@ -74,12 +76,12 @@ fun MovieCardInfo(
                 if (isFavorite) {
                     Icon(
                         Icons.Rounded.Favorite,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 } else {
                     Icon(
                         Icons.Rounded.FavoriteBorder,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             }
@@ -93,11 +95,12 @@ fun MovieCardInfoPreview() {
     MovieListTheme {
         MovieCardInfo(
             modifier = Modifier.fillMaxWidth(),
-            movieItem = MovieItem(
-                id = 1,
-                title = "Movie Title",
-                overview = "Movie Overview",
-            )
+            movieItem =
+                MovieItem(
+                    id = 1,
+                    title = "Movie Title",
+                    overview = "Movie Overview",
+                ),
         )
     }
 }

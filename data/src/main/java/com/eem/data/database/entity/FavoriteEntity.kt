@@ -8,15 +8,17 @@ import com.eem.domain.model.FavoriteMovie
 data class FavoriteEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Long? = null,
-    val title: String
+    val title: String,
 )
 
-fun FavoriteEntity.toDomain() = FavoriteMovie(
-    id = id ?: 0,
-    title = title
-)
+fun FavoriteEntity.toDomain() =
+    FavoriteMovie(
+        id = id ?: 0,
+        title = title,
+    )
 
-fun FavoriteMovie.toEntity() = FavoriteEntity(
-    id = id,
-    title = title
-)
+fun FavoriteMovie.toEntity() =
+    FavoriteEntity(
+        id = id,
+        title = title,
+    )

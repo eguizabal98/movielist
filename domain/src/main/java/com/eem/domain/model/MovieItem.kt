@@ -9,5 +9,5 @@ data class MovieItem(
     var overview: String? = null,
     var popularity: Double? = null,
     var voteAverage: Double? = null,
-    var voteCount: Int? = null
+    var voteCount: Int? = null,
 )

@@ -22,16 +22,16 @@ fun MovieListTopBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             stringResource(R.string.now_playing_movies),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
         )
         IconButton(onClick = { /*TODO*/ }, modifier = Modifier.testTag("settings_button")) {
             Icon(
                 Icons.Rounded.Settings,
-                contentDescription = null
+                contentDescription = null,
             )
         }
     }

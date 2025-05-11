@@ -33,14 +33,15 @@ fun MoviePoster(movieImageUrl: String) {
     var isLoading by remember { mutableStateOf(true) }
 
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(dynamicHeight)
-            .clip(RoundedCornerShape(12.dp))
-            .background(Color.DarkGray)
-            .onSizeChanged {
-                containerWidth = it.width
-            }
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(dynamicHeight)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color.DarkGray)
+                .onSizeChanged {
+                    containerWidth = it.width
+                },
     ) {
         AsyncImage(
             model = movieImageUrl,
@@ -51,7 +52,7 @@ fun MoviePoster(movieImageUrl: String) {
                     .fillMaxSize()
                     .testTag("poster_image"),
             onSuccess = { isLoading = true },
-            onError = { isLoading = true }
+            onError = { isLoading = true },
         )
     }
 }

@@ -32,7 +32,7 @@ data class MovieItemDto(
     @SerializedName("vote_average")
     var voteAverage: Double? = null,
     @SerializedName("vote_count")
-    var voteCount: Int? = null
+    var voteCount: Int? = null,
 )
 
 fun MovieItemDto.toDomain(): MovieItem {
@@ -45,6 +45,6 @@ fun MovieItemDto.toDomain(): MovieItem {
         overview = overview.orEmpty(),
         popularity = popularity ?: 0.0,
         voteAverage = voteAverage ?: 0.0,
-        voteCount = voteCount ?: 0
+        voteCount = voteCount ?: 0,
     )
 }
