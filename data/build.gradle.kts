@@ -15,12 +15,40 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
+            )
+            buildConfigField("String", "BASE_URL", "\"${project.findProperty("BASE_URL")}\"")
+            buildConfigField(
+                "String",
+                "API_READ_TOKEN",
+                "\"${project.findProperty("API_READ_TOKEN")}\""
+            )
+            buildConfigField(
+                "String",
+                "IMAGES_ORIGINAL_BASE_URL",
+                "\"${project.findProperty("IMAGES_ORIGINAL_BASE_URL")}\""
+            )
+        }
+        getByName("debug") {
+            buildConfigField("String", "BASE_URL", "\"${project.findProperty("BASE_URL")}\"")
+            buildConfigField(
+                "String",
+                "API_READ_TOKEN",
+                "\"${project.findProperty("API_READ_TOKEN")}\""
+            )
+            buildConfigField(
+                "String",
+                "IMAGES_ORIGINAL_BASE_URL",
+                "\"${project.findProperty("IMAGES_ORIGINAL_BASE_URL")}\""
             )
         }
     }
@@ -66,6 +94,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Modules
+    //Modules
     implementation(project(":domain"))
 }

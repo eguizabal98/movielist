@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -32,23 +33,25 @@ fun MoviePoster(movieImageUrl: String) {
     var isLoading by remember { mutableStateOf(true) }
 
     Box(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(dynamicHeight)
-                .clip(RoundedCornerShape(12.dp))
-                .background(Color.DarkGray)
-                .onSizeChanged {
-                    containerWidth = it.width
-                },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(dynamicHeight)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.DarkGray)
+            .onSizeChanged {
+                containerWidth = it.width
+            }
     ) {
         AsyncImage(
             model = movieImageUrl,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize(),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .testTag("poster_image"),
             onSuccess = { isLoading = true },
-            onError = { isLoading = true },
+            onError = { isLoading = true }
         )
     }
 }

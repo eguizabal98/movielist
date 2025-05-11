@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.eem.movielist.R
@@ -21,16 +22,16 @@ fun MovieListTopBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             stringResource(R.string.now_playing_movies),
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleLarge
         )
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { /*TODO*/ }, modifier = Modifier.testTag("settings_button")) {
             Icon(
                 Icons.Rounded.Settings,
-                contentDescription = null,
+                contentDescription = null
             )
         }
     }

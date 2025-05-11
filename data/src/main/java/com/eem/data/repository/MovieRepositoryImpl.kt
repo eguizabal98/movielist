@@ -11,9 +11,9 @@ import com.eem.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MovieRepositoryImpl constructor(
+class MovieRepositoryImpl(
     private val moviesApi: MoviesApi,
-    private val favoriteDao: FavoriteDao,
+    private val favoriteDao: FavoriteDao
 ) : MovieRepository {
     override suspend fun getNowPlayingMovies(page: Int): MoviePageData? {
         val response = moviesApi.getNowPlayingMovies(DEFAULT_LANGUAGE, page)

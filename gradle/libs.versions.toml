@@ -19,7 +19,6 @@ okhttp = "4.12.0"
 gson = "2.11.0"
 room = "2.7.0"
 coil = "3.1.0"
-gradle-ktlint = "12.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -72,4 +71,4 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 android-library = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-plugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
-gradleKtlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "gradle-ktlint" }
+

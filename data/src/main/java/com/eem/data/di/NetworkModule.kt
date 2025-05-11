@@ -1,7 +1,7 @@
 package com.eem.data.di
 
+import com.eem.data.BuildConfig
 import com.eem.data.api.MoviesApi
-import com.eem.data.source.ApiConfig
 import com.google.gson.GsonBuilder
 import com.google.gson.Strictness
 import dagger.Module
@@ -28,7 +28,7 @@ object NetworkModule {
             val request = chain.request()
             val newRequest =
                 request.newBuilder()
-                    .addHeader("Authorization", "Bearer ${ApiConfig.API_READ_TOKEN}")
+                    .addHeader("Authorization", "Bearer ${BuildConfig.API_READ_TOKEN}")
                     .build()
             chain.proceed(newRequest)
         }
@@ -75,7 +75,7 @@ object NetworkModule {
 
         return Retrofit
             .Builder()
-            .baseUrl(ApiConfig.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .callFactory { client.newCall(it) }
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
