@@ -1,6 +1,6 @@
 package com.eem.data.util
 
-import com.eem.data.source.ApiConfig.IMAGES_ORIGINAL_BASE_URL
+import com.eem.data.BuildConfig
 
 /**
  * Converts a nullable [String] representing an image path into a full image URL
@@ -12,5 +12,5 @@ import com.eem.data.source.ApiConfig.IMAGES_ORIGINAL_BASE_URL
  * @return The full image URL as a [String].
  */
 fun String?.toImageData(): String {
-    return IMAGES_ORIGINAL_BASE_URL.plus(this)
+    return BuildConfig.IMAGES_ORIGINAL_BASE_URL.plus(this)
 }
